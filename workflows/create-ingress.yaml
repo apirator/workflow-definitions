@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: create-ingress-wf-
+spec:
+  entrypoint: create-ingress
+  arguments:
+    parameters:
+      - name: oas
+        value: "/apis/players-v1.yaml"
+      - name: ingress
+        value: /tmp
+      - name: service
+        value: players
+  workflowTemplateRef:
+    name: create-ingress-wt

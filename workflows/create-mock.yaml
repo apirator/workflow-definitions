@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  generateName: check-api-wf-
+  generateName: create-mock-wf-
 spec:
   entrypoint: create-mock
   arguments:
