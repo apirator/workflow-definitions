@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: check-api-wt
+spec:
+  volumes:
+    - name: oas
+      configMap:
+        name: oas
+        items:
+          - key: players-v1.yaml
+            path: /apis
+          - key: players-v2.yaml
+            path: /apis
+  entrypoint: check-api
+
+  templates:
+    - name: check-api
+      volumes:
+        - name: oas
+          configMap:
+            name: oas
+      inputs:
+        parameters:
+          - name: location
+          - name: error_on
+      container:
+        volumeMounts:
+          - name: oas
+            mountPath: /apis
+        image: stoplight/spectral
+        command: [ spectral, lint ]
+        args: ["{{inputs.parameters.location}}","--fail-severity={{inputs.parameters.error_on}}"]
