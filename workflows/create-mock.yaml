@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: check-api-wf-
+spec:
+  entrypoint: create-mock
+  arguments:
+    parameters:
+     - name: oas_location
+       value: "/apis/players-v1.yaml"
+     - name: service_name
+       value: players
+     - name: service_namespace
+       value: mocks
+  workflowTemplateRef:
+    name: create-mock-wt
