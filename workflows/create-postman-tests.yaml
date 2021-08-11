@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: create-postman-tests-wf-
+spec:
+  entrypoint: create-postman-tests
+  arguments:
+    parameters:
+      - name: oas
+        value: "/apis/players-v1.yaml"
+      - name: file
+        value: /tmp/players.json
+  workflowTemplateRef:
+    name: create-postman-tests-wt

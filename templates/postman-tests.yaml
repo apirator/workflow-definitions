@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: create-postman-tests-wt
+spec:
+  volumes:
+    - name: oas
+      configMap:
+        name: oas
+        items:
+          - key: players-v1.yaml
+            path: /apis
+          - key: players-v2.yaml
+            path: /apis
+  entrypoint: create-postman-tests
+  arguments:
+    parameters:
+      - name: oas
+      - name: file
+  templates:
+    - name: create-postman-tests
+      volumes:
+        - name: oas
+          configMap:
+            name: oas
+      inputs:
+        parameters:
+          - name: oas
+          - name: file
+      container:
+        volumeMounts:
+          - name: oas
+            mountPath: /apis
+        image: claudioed/portman
+        args: ["--local","{{inputs.parameters.oas}}","--includeTests","--bundleContractTests","--output","{{inputs.parameters.file}}"]
+      outputs:
+        artifacts:
+          - name: tests
+            path: /tmp/players.json
+            gcs:
+              bucket: argo-artifacts-001
+              key: tests/players.tgz
+              serviceAccountKeySecret:
+                name: argo-artifact
+                key: argo-development-319710-04e977a95f95.json
