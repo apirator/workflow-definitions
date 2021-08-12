@@ -10,7 +10,7 @@ metadata:
   namespace: events
 spec:
   rules:
-    - host: api-docs-a7ac0dd4.nip.io
+    - host: api-docs-a123fedb.nip.io
       http:
         paths:
           - backend:
@@ -22,5 +22,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - api-docs-a7ac0dd4.nip.io
+        - api-docs-a123fedb.nip.io
       secretName: api-docs-cert
