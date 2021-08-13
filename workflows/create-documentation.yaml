@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: create-documentation-wf-
+spec:
+  entrypoint: openapi-doc
+  arguments:
+    parameters:
+      - name: new_api_location
+        value: "/apis/players-v2.yaml"
+  workflowTemplateRef:
+    name: documentation-api-wt

@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: WorkflowTemplate
 metadata:
-  name: check-api-wt
+  name: documentation-api-wt
 spec:
   volumes:
     - name: oas
@@ -13,22 +13,21 @@ spec:
           - key: players-v2.yaml
             path: /apis
 
-  entrypoint: check-api
+  entrypoint: openapi-doc
 
   templates:
-    - name: check-api
+    - name: openapi-doc
       volumes:
         - name: oas
           configMap:
             name: oas
       inputs:
         parameters:
-          - name: location
-          - name: error_on
+          - name: new_api_location
       container:
         volumeMounts:
           - name: oas
             mountPath: /apis
-        image: stoplight/spectral
-        command: [ spectral, lint ]
-        args: ["{{inputs.parameters.location}}","--fail-severity={{inputs.parameters.error_on}}"]
+        image: shesse/redoc-cli
+        command: [ redoc-cli ]
+        args: ["{{inputs.parameters.new_api_location}}"]

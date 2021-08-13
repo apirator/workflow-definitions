@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: create-catalog-wf-
+spec:
+  entrypoint: api-catalog
+  arguments:
+    parameters:
+      - name: oas-location
+        value: "/apis/players-v1.yaml"
+      - name: name
+        value: players
+      - name: lifecycle
+        value: development
+      - name: api-type
+        value: internal
+      - name: owner
+        value: bets-team
+      - name: system
+        value: bets
+  workflowTemplateRef:
+    name: api-catalog-wt

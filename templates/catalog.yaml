@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: api-catalog-wt
+spec:
+  volumes:
+    - name: oas
+      configMap:
+        name: oas
+        items:
+          - key: players-v1.yaml
+            path: /apis
+          - key: players-v2.yaml
+            path: /apis
+
+  entrypoint: api-catalog
+
+  templates:
+    - name: api-catalog
+      volumes:
+        - name: oas
+          configMap:
+            name: oas
+      inputs:
+        parameters:
+          - name: name
+          - name: api-type
+          - name: lifecycle
+          - name: owner
+          - name: system
+          - name: oas-location
+      container:
+        volumeMounts:
+          - name: oas
+            mountPath: /apis
+        image: claudioed/pipeline-converters
+        args: ["openapi2backstage","--oas-location","{{inputs.parameters.oas-location}}","--api-type","{{inputs.parameters.api-type}}","--lifecycle","{{inputs.parameters.lifecycle}}","--owner","{{inputs.parameters.owner}}","--system","{{inputs.parameters.system}}","--name","{{inputs.parameters.name}}"]
+      outputs:
+        artifacts:
+          - name: catalog
+            path: /tmp
+            gcs:
+              bucket: argo-artifacts-001
+              key: catalog/players.yaml.tgz
+              serviceAccountKeySecret:
+                name: argo-artifact
+                key: argo-development-319710-04e977a95f95.json
