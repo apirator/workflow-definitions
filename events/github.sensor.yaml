@@ -60,7 +60,7 @@ spec:
                     - name: location
                       value: "workspace/apis/players-v1.yaml"
                     - name: error_on
-                      value: error
+                      value: info
                       ## error, warn,info and hint
                 workflowTemplateRef:
                   name: check-api-wt
