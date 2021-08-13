@@ -7,7 +7,7 @@ spec:
   arguments:
     parameters:
       - name: oas-location
-        value: "/apis/players-v1.yaml"
+        value: "workspace/apis/players-v1.yaml"
       - name: name
         value: players
       - name: lifecycle

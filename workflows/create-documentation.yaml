@@ -7,6 +7,6 @@ spec:
   arguments:
     parameters:
       - name: new_api_location
-        value: "/apis/players-v2.yaml"
+        value: "workspace/apis/players-v2.yaml"
   workflowTemplateRef:
     name: documentation-api-wt

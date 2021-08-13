@@ -7,7 +7,7 @@ spec:
   arguments:
     parameters:
      - name: oas_location
-       value: "/apis/players-v1.yaml"
+       value: "workspace/apis/players-v1.yaml"
      - name: service_name
        value: players
      - name: service_namespace

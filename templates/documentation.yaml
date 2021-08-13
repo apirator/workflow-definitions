@@ -3,31 +3,19 @@ kind: WorkflowTemplate
 metadata:
   name: documentation-api-wt
 spec:
-  volumes:
-    - name: oas
-      configMap:
-        name: oas
-        items:
-          - key: players-v1.yaml
-            path: /apis
-          - key: players-v2.yaml
-            path: /apis
-
   entrypoint: openapi-doc
-
   templates:
     - name: openapi-doc
-      volumes:
-        - name: oas
-          configMap:
-            name: oas
       inputs:
+        artifacts:
+          - name: apis
+            path: /workspace
+            git:
+              repo: https://github.com/apirator/workflow-api-docs.git
+              revision: "main"
         parameters:
           - name: new_api_location
       container:
-        volumeMounts:
-          - name: oas
-            mountPath: /apis
         image: shesse/redoc-cli
         command: [ redoc-cli ]
         args: ["{{inputs.parameters.new_api_location}}"]

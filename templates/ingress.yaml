@@ -3,15 +3,6 @@ kind: WorkflowTemplate
 metadata:
   name: create-ingress-wt
 spec:
-  volumes:
-    - name: oas
-      configMap:
-        name: oas
-        items:
-          - key: players-v1.yaml
-            path: /apis
-          - key: players-v2.yaml
-            path: /apis
   entrypoint: create-ingress
   arguments:
     parameters:
@@ -20,19 +11,18 @@ spec:
       - name: service
   templates:
     - name: create-ingress
-      volumes:
-        - name: oas
-          configMap:
-            name: oas
       inputs:
+        artifacts:
+          - name: apis
+            path: /workspace
+            git:
+              repo: https://github.com/apirator/workflow-api-docs.git
+              revision: "main"
         parameters:
           - name: oas
           - name: ingress
           - name: service
       container:
-        volumeMounts:
-          - name: oas
-            mountPath: /apis
         image: claudioed/openapitokongingress
         command: [oas2ingress,convert]
         args: ["--oas","{{inputs.parameters.oas}}","--ingress","{{inputs.parameters.ingress}}","--service","{{inputs.parameters.service}}"]

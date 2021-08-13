@@ -3,15 +3,6 @@ kind: WorkflowTemplate
 metadata:
   name: create-postman-tests-wt
 spec:
-  volumes:
-    - name: oas
-      configMap:
-        name: oas
-        items:
-          - key: players-v1.yaml
-            path: /apis
-          - key: players-v2.yaml
-            path: /apis
   entrypoint: create-postman-tests
   arguments:
     parameters:
@@ -19,18 +10,17 @@ spec:
       - name: file
   templates:
     - name: create-postman-tests
-      volumes:
-        - name: oas
-          configMap:
-            name: oas
       inputs:
+        artifacts:
+          - name: apis
+            path: /workspace
+            git:
+              repo: https://github.com/apirator/workflow-api-docs.git
+              revision: "main"
         parameters:
           - name: oas
           - name: file
       container:
-        volumeMounts:
-          - name: oas
-            mountPath: /apis
         image: claudioed/portman
         args: ["--local","{{inputs.parameters.oas}}","--includeTests","--bundleContractTests","--output","{{inputs.parameters.file}}"]
       outputs:

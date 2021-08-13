@@ -7,7 +7,7 @@ spec:
   arguments:
     parameters:
       - name: oas
-        value: "/apis/players-v1.yaml"
+        value: "workspace/apis/players-v1.yaml"
       - name: file
         value: /tmp/players.json
   workflowTemplateRef:

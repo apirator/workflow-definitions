@@ -3,31 +3,21 @@ kind: WorkflowTemplate
 metadata:
   name: create-mock-wt
 spec:
-  volumes:
-    - name: oas
-      configMap:
-        name: oas
-        items:
-          - key: players-v1.yaml
-            path: /apis
-          - key: players-v2.yaml
-            path: /apis
   entrypoint: create-mock
   templates:
     - name: create-mock
-      volumes:
-        - name: oas
-          configMap:
-            name: oas
       inputs:
+        artifacts:
+          - name: apis
+            path: /workspace
+            git:
+              repo: https://github.com/apirator/workflow-api-docs.git
+              revision: "main"
         parameters:
           - name: oas_location
           - name: service_name
           - name: service_namespace
       container:
-        volumeMounts:
-          - name: oas
-            mountPath: /apis
         image: claudioed/pipeline-converters
         args: ["openapi2mock","--oas-location","{{inputs.parameters.oas_location}}","--service-name","{{inputs.parameters.service_name}}","--service-namespace","{{inputs.parameters.service_namespace}}"]
       outputs:

@@ -3,25 +3,16 @@ kind: WorkflowTemplate
 metadata:
   name: api-catalog-wt
 spec:
-  volumes:
-    - name: oas
-      configMap:
-        name: oas
-        items:
-          - key: players-v1.yaml
-            path: /apis
-          - key: players-v2.yaml
-            path: /apis
-
   entrypoint: api-catalog
-
   templates:
     - name: api-catalog
-      volumes:
-        - name: oas
-          configMap:
-            name: oas
       inputs:
+        artifacts:
+          - name: apis
+            path: /workspace
+            git:
+              repo: https://github.com/apirator/workflow-api-docs.git
+              revision: "main"
         parameters:
           - name: name
           - name: api-type
@@ -30,9 +21,6 @@ spec:
           - name: system
           - name: oas-location
       container:
-        volumeMounts:
-          - name: oas
-            mountPath: /apis
         image: claudioed/pipeline-converters
         args: ["openapi2backstage","--oas-location","{{inputs.parameters.oas-location}}","--api-type","{{inputs.parameters.api-type}}","--lifecycle","{{inputs.parameters.lifecycle}}","--owner","{{inputs.parameters.owner}}","--system","{{inputs.parameters.system}}","--name","{{inputs.parameters.name}}"]
       outputs:
