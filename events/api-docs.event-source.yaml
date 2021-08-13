@@ -18,7 +18,7 @@ spec:
         endpoint: /push
         port: "12000"
         method: POST
-        url: https://api-docs-a7ac0dd4.nip.io
+        url: https://api-docs-a123fedb.nip.io
       events:
         - "*"
       apiToken:

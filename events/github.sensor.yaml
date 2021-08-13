@@ -4,6 +4,11 @@ metadata:
   name: github
   namespace: events
 spec:
+  template:
+    container:
+      env:
+        - name: "DEBUG_LOG"
+          value: "true"
   dependencies:
     - name: test-dep
       eventSourceName: api-docs
