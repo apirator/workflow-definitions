@@ -1,0 +1,14 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: lint-api-wf-
+spec:
+  entrypoint: lint-api
+  arguments:
+    parameters:
+      - name: location
+        value: "workspace/apis/players-v1.yaml"
+      - name: error_on
+        value: error
+  workflowTemplateRef:
+    name: check-api-git-wt

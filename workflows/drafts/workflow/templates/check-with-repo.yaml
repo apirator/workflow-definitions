@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: check-api-git-wt
+spec:
+  entrypoint: lint-api
+  templates:
+    - name: lint-api
+      inputs:
+        artifacts:
+          - name: apis
+            path: /workspace
+            git:
+              repo: https://github.com/apirator/workflow-api-docs.git
+              revision: "main"
+        parameters:
+          - name: location
+          - name: error_on
+      container:
+        image: stoplight/spectral
+        command: [ spectral, lint ]
+        args: ["{{inputs.parameters.location}}","--fail-severity={{inputs.parameters.error_on}}"]
