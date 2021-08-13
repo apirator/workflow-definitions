@@ -37,6 +37,8 @@ spec:
             type: string
             value:
               - main
+  workflowTemplateRef:
+    name: check-api-wt
   triggers:
     - template:
         name: github-workflow-trigger
@@ -50,43 +52,22 @@ spec:
               apiVersion: argoproj.io/v1alpha1
               kind: Workflow
               metadata:
-                name: github-
+                generateName: check-api-wf-
               spec:
-                entrypoint: whalesay
+                entrypoint: check-api
                 arguments:
                   parameters:
-                    - name: pr-title
-                    - name: pr-number
-                    - name: short-sha
-                templates:
-                  - name: whalesay
-                    inputs:
-                      parameters:
-                        - name: pr-title
-                        - name: pr-number
-                        - name: short-sha
-                    container:
-                      image: docker/whalesay:latest
-                      command: [ cowsay ]
-                      args: [ "{{inputs.parameters.pr-title}}" ]
+                    - name: location
+                      value: "workspace/apis/players-v1.yaml"
+                    - name: error_on
+                      value: error
+                      ## error, warn,info and hint
+                workflowTemplateRef:
+                  name: check-api-wt
           parameters:
             - src:
                 dependencyName: test-dep
                 dataKey: body.pull_request.title
               dest: spec.arguments.parameters.0.value
-            - src:
-                dependencyName: test-dep
-                dataKey: body.pull_request.number
-              dest: spec.arguments.parameters.1.value
-            - src:
-                dependencyName: test-dep
-                dataTemplate: "{{ .Input.body.pull_request.head.sha | substr 0 7 }}"
-              dest: spec.arguments.parameters.2.value
-            # Append pull request number and short sha to dynamically assign worklfow name <github-21500-2c065a>
-            - src:
-                dependencyName: test-dep
-                dataTemplate: "{{ .Input.body.pull_request.number }}-{{ .Input.body.pull_request.head.sha | substr 0 7 }}"
-              dest: metadata.name
-              operation: append
       retryStrategy:
         steps: 3
