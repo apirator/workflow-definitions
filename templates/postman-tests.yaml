@@ -8,6 +8,7 @@ spec:
     parameters:
       - name: oas
       - name: file
+      - name: branch
   templates:
     - name: create-postman-tests
       inputs:
@@ -16,7 +17,7 @@ spec:
             path: /workspace
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
-              revision: "main"
+              revision: "{{inputs.parameters.branch}}"
         parameters:
           - name: oas
           - name: file

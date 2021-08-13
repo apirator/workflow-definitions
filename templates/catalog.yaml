@@ -12,7 +12,7 @@ spec:
             path: /workspace
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
-              revision: "main"
+              revision: "{{inputs.parameters.branch}}"
         parameters:
           - name: name
           - name: api-type
@@ -20,6 +20,7 @@ spec:
           - name: owner
           - name: system
           - name: oas-location
+          - name: branch
       container:
         image: claudioed/pipeline-converters
         args: ["openapi2backstage","--oas-location","{{inputs.parameters.oas-location}}","--api-type","{{inputs.parameters.api-type}}","--lifecycle","{{inputs.parameters.lifecycle}}","--owner","{{inputs.parameters.owner}}","--system","{{inputs.parameters.system}}","--name","{{inputs.parameters.name}}"]

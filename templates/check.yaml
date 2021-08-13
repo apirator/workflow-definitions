@@ -12,10 +12,11 @@ spec:
             path: /workspace
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
-              revision: "main"
+              revision: "{{inputs.parameters.branch}}"
         parameters:
           - name: location
           - name: error_on
+          - name: branch
       container:
         image: stoplight/spectral
         command: [ spectral, lint ]

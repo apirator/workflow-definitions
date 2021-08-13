@@ -12,10 +12,21 @@ spec:
             path: /workspace
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
-              revision: "main"
+              revision: "{{inputs.parameters.branch}}"
         parameters:
           - name: new_api_location
+          - name: branch
       container:
         image: shesse/redoc-cli
         command: [ redoc-cli ]
         args: ["{{inputs.parameters.new_api_location}}"]
+      outputs:
+        artifacts:
+          - name: ingress
+            path: /tmp/players.yaml
+            gcs:
+              bucket: argo-artifacts-001
+              key: docs/players.tgz
+              serviceAccountKeySecret:
+                name: argo-artifact
+                key: argo-development-319710-04e977a95f95.json

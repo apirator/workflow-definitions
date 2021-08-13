@@ -18,5 +18,7 @@ spec:
         value: bets-team
       - name: system
         value: bets
+      - name: branch
+        value: main
   workflowTemplateRef:
     name: api-catalog-wt

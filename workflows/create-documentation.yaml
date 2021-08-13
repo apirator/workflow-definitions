@@ -6,6 +6,8 @@ spec:
   entrypoint: openapi-doc
   arguments:
     parameters:
+      - name: branch
+        value: players-v5
       - name: new_api_location
         value: "workspace/apis/players-v2.yaml"
   workflowTemplateRef:

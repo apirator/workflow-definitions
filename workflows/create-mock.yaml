@@ -6,6 +6,8 @@ spec:
   entrypoint: create-mock
   arguments:
     parameters:
+     - name: branch
+       value: players-v5
      - name: oas_location
        value: "workspace/apis/players-v1.yaml"
      - name: service_name

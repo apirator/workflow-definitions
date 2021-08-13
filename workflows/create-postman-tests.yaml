@@ -6,6 +6,8 @@ spec:
   entrypoint: create-postman-tests
   arguments:
     parameters:
+      - name: branch
+        value: players-v5
       - name: oas
         value: "workspace/apis/players-v1.yaml"
       - name: file

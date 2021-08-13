@@ -9,6 +9,7 @@ spec:
       - name: oas
       - name: ingress
       - name: service
+      - name: branch
   templates:
     - name: create-ingress
       inputs:
@@ -17,7 +18,7 @@ spec:
             path: /workspace
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
-              revision: "main"
+              revision: "{{inputs.parameters.branch}}"
         parameters:
           - name: oas
           - name: ingress

@@ -6,8 +6,10 @@ spec:
   entrypoint: check-api
   arguments:
     parameters:
+      - name: branch
+        value: players-v5
       - name: location
-        value: "workspace/apis/players-v1.yaml"
+        value: "workspace/apis/players-v5.yaml"
       - name: error_on
         value: error
         ## error, warn,info and hint
