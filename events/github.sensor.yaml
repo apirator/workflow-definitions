@@ -5,6 +5,7 @@ metadata:
   namespace: events
 spec:
   template:
+    serviceAccountName: github-sensor-sa
     container:
       env:
         - name: "DEBUG_LOG"
