@@ -15,18 +15,21 @@ spec:
               revision: "{{inputs.parameters.branch}}"
         parameters:
           - name: new_api_location
+          - name: destination_folder
           - name: branch
       container:
         image: shesse/redoc-cli
         command: [ redoc-cli ]
-        args: ["{{inputs.parameters.new_api_location}}"]
+        args: ["bundle","{{inputs.parameters.new_api_location}}","--output","{{inputs.parameters.destination_folder}}"]
       outputs:
         artifacts:
-          - name: ingress
-            path: /tmp/players.yaml
+          - name: docs
+            path: "{{inputs.parameters.destination_folder}}"
+            archive:
+              none: {}
             gcs:
               bucket: argo-artifacts-001
-              key: docs/players.tgz
+              key: docs/players.html
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json

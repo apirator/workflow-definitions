@@ -9,6 +9,8 @@ spec:
       - name: branch
         value: players-v5
       - name: new_api_location
-        value: "workspace/apis/players-v2.yaml"
+        value: "workspace/apis/players-v5.yaml"
+      - name: destination_folder
+        value: "/tmp/players.html"
   workflowTemplateRef:
     name: documentation-api-wt
