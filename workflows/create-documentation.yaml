@@ -12,5 +12,7 @@ spec:
         value: "workspace/apis/players-v5.yaml"
       - name: destination_folder
         value: "/tmp/players.html"
+      - name: api_name
+        value: players
   workflowTemplateRef:
     name: documentation-api-wt

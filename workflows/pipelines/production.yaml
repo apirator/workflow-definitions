@@ -52,6 +52,8 @@ spec:
                   value: "workspace/apis/players-v5.yaml"
                 - name: destination_folder
                   value: "/tmp/players.html"
+                - name: api_name
+                  value: players
         - - name: deploy-api
             templateRef:
               name: create-ingress-wt

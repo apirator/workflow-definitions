@@ -17,6 +17,7 @@ spec:
           - name: new_api_location
           - name: destination_folder
           - name: branch
+          - name: api_name
       container:
         image: shesse/redoc-cli
         command: [ redoc-cli ]
@@ -29,7 +30,7 @@ spec:
               none: {}
             gcs:
               bucket: argo-artifacts-001
-              key: docs/players.html
+              key: "docs/{{inputs.parameters.api_name}}.html"
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json

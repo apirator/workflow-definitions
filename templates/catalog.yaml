@@ -30,7 +30,7 @@ spec:
             path: /tmp
             gcs:
               bucket: argo-artifacts-001
-              key: catalog/players.yaml.tgz
+              key: "catalog/{{inputs.parameters.name}}.yaml.tgz"
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json
