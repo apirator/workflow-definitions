@@ -1,0 +1,68 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: api-production-wf-
+spec:
+  entrypoint: api-production-flow
+  templates:
+    - name: api-production-flow
+      steps:
+        - - name: check-api
+            templateRef:
+              name: check-api-wt
+              template: check-api
+            arguments:
+              parameters:
+                - name: branch
+                  value: players-v5
+                - name: location
+                  value: "workspace/apis/players-v5.yaml"
+                - name: error_on
+                  value: error
+                  ## error, warn,info and hint
+        - - name: catalog-api
+            templateRef:
+              name: api-catalog-wt
+              template: api-catalog
+            arguments:
+              parameters:
+                - name: oas-location
+                  value: "workspace/apis/players-v5.yaml"
+                - name: name
+                  value: players
+                - name: lifecycle
+                  value: production
+                - name: api-type
+                  value: internal
+                - name: owner
+                  value: bets-team
+                - name: system
+                  value: bets
+                - name: branch
+                  value: players-v5
+        - - name: document-api
+            templateRef:
+              name: documentation-api-wt
+              template: openapi-doc
+            arguments:
+              parameters:
+                - name: branch
+                  value: players-v5
+                - name: new_api_location
+                  value: "workspace/apis/players-v5.yaml"
+                - name: destination_folder
+                  value: "/tmp/players.html"
+        - - name: deploy-api
+            templateRef:
+              name: create-ingress-wt
+              template: create-ingress
+            arguments:
+              parameters:
+                - name: branch
+                  value: players-v5
+                - name: oas
+                  value: "/workspace/apis/players-v5.yaml"
+                - name: ingress
+                  value: /tmp
+                - name: service
+                  value: players

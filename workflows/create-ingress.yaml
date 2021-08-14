@@ -9,7 +9,7 @@ spec:
       - name: branch
         value: players-v5
       - name: oas
-        value: "workspace/apis/players-v1.yaml"
+        value: "/workspace/apis/players-v5.yaml"
       - name: ingress
         value: /tmp
       - name: service

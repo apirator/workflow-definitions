@@ -23,6 +23,7 @@ spec:
           - name: oas
           - name: ingress
           - name: service
+          - name: branch
       container:
         image: claudioed/openapitokongingress
         command: [oas2ingress,convert]
