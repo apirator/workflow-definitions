@@ -9,6 +9,7 @@ spec:
       - name: oas
       - name: file
       - name: branch
+      - name: api_name
   templates:
     - name: create-postman-tests
       inputs:
@@ -21,16 +22,18 @@ spec:
         parameters:
           - name: oas
           - name: file
+          - name: branch
+          - name: api_name
       container:
         image: claudioed/portman
         args: ["--local","{{inputs.parameters.oas}}","--includeTests","--bundleContractTests","--output","{{inputs.parameters.file}}"]
       outputs:
         artifacts:
           - name: tests
-            path: /tmp/players.json
+            path: "/tmp/{{inputs.parameters.file}}"
             gcs:
               bucket: argo-artifacts-001
-              key: tests/players.tgz
+              key: "tests/{{inputs.parameters.file}}.json"
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json

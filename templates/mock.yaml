@@ -25,9 +25,11 @@ spec:
         artifacts:
           - name: cr
             path: /tmp
+            archive:
+              none: {}
             gcs:
               bucket: argo-artifacts-001
-              key: "mocks/{{inputs.parameters.service_name}}.yaml.tgz"
+              key: "mocks/{{inputs.parameters.service_name}}.yaml"
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json

@@ -32,9 +32,11 @@ spec:
         artifacts:
           - name: ingress
             path: /tmp/players.yaml
+            archive:
+              none: {}
             gcs:
               bucket: argo-artifacts-001
-              key: "ingresses/{{inputs.parameters.service}}.tgz"
+              key: "ingresses/{{inputs.parameters.service}}.yaml"
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json

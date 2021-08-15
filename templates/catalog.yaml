@@ -27,10 +27,12 @@ spec:
       outputs:
         artifacts:
           - name: catalog
-            path: /tmp
+            path: "/tmp/{{inputs.parameters.name}}.yaml"
+            archive:
+              none: {}
             gcs:
               bucket: argo-artifacts-001
-              key: "catalog/{{inputs.parameters.name}}.yaml.tgz"
+              key: "catalog/{{inputs.parameters.name}}.yaml"
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json
