@@ -68,3 +68,20 @@ spec:
                   value: /tmp
                 - name: service
                   value: players
+        - - name: create-pr
+            templateRef:
+              name: create-api-pr-production-wt
+              template: create-pr
+            arguments:
+              parameters:
+                - name: commit_message
+                  value: "players API V5"
+                - name: branch_name
+                  value: "players-v5"
+                - name: api_name
+                  value: "players-v5"
+              artifacts:
+                - name: catalog-file
+                  from: "{{steps.catalog-api.outputs.artifacts.catalog}}"
+                - name: deploy-file
+                  from: "{{steps.deploy-api.outputs.artifacts.ingress}}"

@@ -1,11 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  generateName: api-production-wf-
+  generateName: api-prototyping-wf-
 spec:
-  entrypoint: api-production-flow
+  entrypoint: api-prototyping-flow
   templates:
-    - name: api-production-flow
+    - name: api-prototyping-flow
       steps:
         - - name: check-api
             templateRef:
@@ -19,26 +19,6 @@ spec:
                   value: "workspace/apis/players-v5.yaml"
                 - name: error_on
                   value: error
-        - - name: catalog-api
-            templateRef:
-              name: api-catalog-wt
-              template: api-catalog
-            arguments:
-              parameters:
-                - name: oas-location
-                  value: "workspace/apis/players-v5.yaml"
-                - name: name
-                  value: players
-                - name: lifecycle
-                  value: production
-                - name: api-type
-                  value: internal
-                - name: owner
-                  value: bets-team
-                - name: system
-                  value: bets
-                - name: branch
-                  value: players-v5
         - - name: document-api
             templateRef:
               name: documentation-api-wt
@@ -51,17 +31,17 @@ spec:
                   value: "workspace/apis/players-v5.yaml"
                 - name: destination_folder
                   value: "/tmp/players.html"
-        - - name: deploy-api
+        - - name: mocking-api
             templateRef:
-              name: create-ingress-wt
-              template: create-ingress
+              name: create-mock-wt
+              template: create-mock
             arguments:
               parameters:
                 - name: branch
                   value: players-v5
-                - name: oas
-                  value: "/workspace/apis/players-v5.yaml"
-                - name: ingress
-                  value: /tmp
-                - name: service
+                - name: oas_location
+                  value: "workspace/apis/players-v1.yaml"
+                - name: service_name
                   value: players
+                - name: service_namespace
+                  value: mocks

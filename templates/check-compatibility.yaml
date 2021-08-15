@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: check-api-compatibility-wt
+spec:
+  entrypoint: check-api-compatibility
+  templates:
+    - name: check-backward-compatibility
+      inputs:
+        parameters:
+          - name: new_api_location
+          - name: old_api_location
+          - name: args
+      container:
+        image: openapitools/openapi-diff:latest
+        args: ["{{inputs.parameters.old_api_location}}","{{inputs.parameters.new_api_location}}", "{{inputs.parameters.args}}"]

@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: check-api-wf-
+spec:
+  entrypoint: check-api
+  arguments:
+    parameters:
+      - name: branch
+        value: players-v5
+      - name: new_api_location
+        value: "workspace/apis/players-v5.yaml"
+      - name: old_api_location
+        value: "workspace/apis/players-v1.yaml"
+      - name: args
+        value: --fail-on-incompatible
+        ## --state, --fail-on-incompatible
+  workflowTemplateRef:
+    name: check-api-wt
