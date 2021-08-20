@@ -8,7 +8,7 @@ metadata:
   namespace: events
 spec:
   rules:
-    - host: api-docs-a7ac0cb1.nip.io
+    - host: docs.apiriders.cloud
       http:
         paths:
           - backend:
@@ -20,5 +20,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - api-docs-a7ac0cb1.nip.io
+        - docs.apiriders.cloud
       secretName: api-docs-cert
