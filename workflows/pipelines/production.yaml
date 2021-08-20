@@ -33,7 +33,7 @@ spec:
             templateRef:
               name: check-api-wt
               template: check-api
-            input:
+            arguments:
               parameters:
                 - name: branch
                   value: players-v5
@@ -41,7 +41,7 @@ spec:
             templateRef:
               name: api-catalog-wt
               template: api-catalog
-            input:
+            arguments:
               parameters:
                 - name: branch
                   value: players-v5
@@ -49,7 +49,7 @@ spec:
             templateRef:
               name: documentation-api-wt
               template: openapi-doc
-            input:
+            arguments:
               parameters:
                 - name: branch
                   value: players-v5
@@ -57,7 +57,7 @@ spec:
             templateRef:
               name: create-ingress-wt
               template: create-ingress
-            input:
+            arguments:
               parameters:
                 - name: branch
                   value: players-v5
@@ -65,11 +65,10 @@ spec:
             templateRef:
               name: create-api-pr-production-wt
               template: create-pr
-            input:
+            arguments:
               parameters:
                 - name: branch
                   value: players-v5
-            arguments:
               artifacts:
                 - name: catalog-file
                   from: "{{steps.catalog-api.outputs.artifacts.catalog}}"

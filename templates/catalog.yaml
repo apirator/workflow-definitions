@@ -7,6 +7,8 @@ spec:
   templates:
     - name: api-catalog
       inputs:
+        parameters:
+          - name: branch
         artifacts:
           - name: apis
             path: /workspace
@@ -21,7 +23,6 @@ spec:
           - name: owner
           - name: system
           - name: oas-location
-          - name: branch
       container:
         image: claudioed/pipeline-converters:v.0.0.1
         args: ["openapi2backstage","--oas-location","{{arguments.parameters.oas-location}}","--api-type","{{arguments.parameters.api-type}}","--lifecycle","{{arguments.parameters.lifecycle}}","--owner","{{arguments.parameters.owner}}","--system","{{arguments.parameters.system}}","--name","{{arguments.parameters.name}}"]
