@@ -16,7 +16,7 @@ spec:
           - name: commit_message
           - name: branch_name
           - name: api_name
-          - name: api_context_location
+          - name: api-context-location
       script:
         image: claudioed/githucli:v.0.0.5
         command: [bash]
