@@ -25,16 +25,16 @@ spec:
           - name: oas-location
       container:
         image: claudioed/pipeline-converters:v.0.0.1
-        args: ["openapi2backstage","--oas-location","{{inputs.parameters.oas-location}}","--api-type","{{inputs.parameters.api-type}}","--lifecycle","{{inputs.parameters.lifecycle}}","--owner","{{inputs.parameters.owner}}","--system","{{inputs.parameters.system}}","--name","{{inputs.parameters.name}}"]
+        args: ["openapi2backstage","--oas-location","{{arguments.parameters.oas-location}}","--api-type","{{arguments.parameters.api-type}}","--lifecycle","{{arguments.parameters.lifecycle}}","--owner","{{arguments.parameters.owner}}","--system","{{arguments.parameters.system}}","--name","{{arguments.parameters.name}}"]
       outputs:
         artifacts:
           - name: catalog
-            path: "/tmp/{{inputs.parameters.name}}.yaml"
+            path: "/tmp/{{arguments.parameters.name}}.yaml"
             archive:
               none: {}
             gcs:
               bucket: argo-artifacts-001
-              key: "catalog/{{inputs.parameters.name}}.yaml"
+              key: "catalog/{{arguments.parameters.name}}.yaml"
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json
