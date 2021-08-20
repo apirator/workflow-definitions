@@ -12,7 +12,7 @@ spec:
             path: /workspace
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
-              revision: "players-v5"
+              revision: "{{inputs.parameters.branch}}"
       arguments:
         parameters:
           - name: location

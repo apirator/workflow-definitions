@@ -33,22 +33,42 @@ spec:
             templateRef:
               name: check-api-wt
               template: check-api
+            input:
+              parameters:
+                - name: branch
+                  value: players-v5
         - - name: catalog-api
             templateRef:
               name: api-catalog-wt
               template: api-catalog
+            input:
+              parameters:
+                - name: branch
+                  value: players-v5
         - - name: document-api
             templateRef:
               name: documentation-api-wt
               template: openapi-doc
+            input:
+              parameters:
+                - name: branch
+                  value: players-v5
         - - name: deploy-api
             templateRef:
               name: create-ingress-wt
               template: create-ingress
+            input:
+              parameters:
+                - name: branch
+                  value: players-v5
         - - name: create-pr
             templateRef:
               name: create-api-pr-production-wt
               template: create-pr
+            input:
+              parameters:
+                - name: branch
+                  value: players-v5
             arguments:
               artifacts:
                 - name: catalog-file
