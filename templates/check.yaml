@@ -15,11 +15,9 @@ spec:
               revision: "{{inputs.parameters.branch}}"
         parameters:
           - name: branch
-      arguments:
-        parameters:
           - name: location
           - name: error_on
       container:
         image: stoplight/spectral
         command: [ spectral, lint ]
-        args: ["{{arguments.parameters.location}}","--fail-severity={{arguments.parameters.error_on}}"]
+        args: ["{{inputs.parameters.location}}","--fail-severity={{inputs.parameters.error_on}}"]

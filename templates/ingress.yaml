@@ -21,8 +21,6 @@ spec:
               revision: "{{input.parameters.branch}}"
         parameters:
           - name: branch
-      arguments:
-        parameters:
           - name: oas
           - name: ingress
           - name: service

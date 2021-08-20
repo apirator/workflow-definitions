@@ -12,11 +12,9 @@ spec:
             path: /workspace
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
-              revision: "players-v5"
+              revision: "{{inputs.parameters.branch}}"
         parameters:
           - name: branch
-      arguments:
-        parameters:
           - name: name
           - name: api-type
           - name: lifecycle
@@ -25,16 +23,16 @@ spec:
           - name: oas-location
       container:
         image: claudioed/pipeline-converters:v.0.0.1
-        args: ["openapi2backstage","--oas-location","{{arguments.parameters.oas-location}}","--api-type","{{arguments.parameters.api-type}}","--lifecycle","{{arguments.parameters.lifecycle}}","--owner","{{arguments.parameters.owner}}","--system","{{arguments.parameters.system}}","--name","{{arguments.parameters.name}}"]
+        args: ["openapi2backstage","--oas-location","{{inputs.parameters.oas-location}}","--api-type","{{inputs.parameters.api-type}}","--lifecycle","{{inputs.parameters.lifecycle}}","--owner","{{inputs.parameters.owner}}","--system","{{inputs.parameters.system}}","--name","{{inputs.parameters.name}}"]
       outputs:
         artifacts:
           - name: catalog
-            path: "/tmp/{{arguments.parameters.name}}.yaml"
+            path: "/tmp/{{inputs.parameters.name}}.yaml"
             archive:
               none: {}
             gcs:
               bucket: argo-artifacts-001
-              key: "catalog/{{arguments.parameters.name}}.yaml"
+              key: "catalog/{{inputs.parameters.name}}.yaml"
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json

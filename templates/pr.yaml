@@ -12,7 +12,6 @@ spec:
             path: /tmp/catalog.yaml
           - name: deploy-file
             path: /tmp/deploy.yaml
-      arguments:
         parameters:
           - name: commit_message
           - name: branch_name
@@ -29,20 +28,20 @@ spec:
         source: |
           git clone https://apirator:${GH_TOKEN}@github.com/apirator/workflow-manifests.git
           cd workflow-manifests && \
-          git checkout -b {{arguments.parameters.branch_name}} && \
+          git checkout -b {{inputs.parameters.branch_name}} && \
           echo "writing files " && \
-          cat /tmp/catalog.yaml >> catalogs/{{arguments.parameters.api_name}}.yaml && \
-          cat /tmp/deploy.yaml >> apis/{{arguments.parameters.api_name}}.yaml && \
+          cat /tmp/catalog.yaml >> catalogs/{{inputs.parameters.api_name}}.yaml && \
+          cat /tmp/deploy.yaml >> apis/{{inputs.parameters.api_name}}.yaml && \
           git status && \
           echo "configuring github user" && \
           git config --global user.email "apirator@gmail.com" && \
           git config --global user.name "apirator" && \
           echo "adding files " && \
-          git add catalogs/{{arguments.parameters.api_name}}.yaml && \
-          git add apis/{{arguments.parameters.api_name}}.yaml && \
+          git add catalogs/{{inputs.parameters.api_name}}.yaml && \
+          git add apis/{{inputs.parameters.api_name}}.yaml && \
           git status && \
           echo "commiting files " && \
           git commit -m "new api" && \
           echo "pushing files " && \
-          git push -u origin {{arguments.parameters.branch_name}} && \
-          gh pr create --head {{arguments.parameters.branch_name}} --base main --title "New API " --body "API"
+          git push -u origin {{inputs.parameters.branch_name}} && \
+          gh pr create --head {{inputs.parameters.branch_name}} --base main --title "New API " --body "API"

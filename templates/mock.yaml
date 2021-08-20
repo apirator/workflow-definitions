@@ -15,14 +15,12 @@ spec:
               revision: "{{input.parameters.branch}}"
         parameters:
           - name: branch
-      arguments:
-        parameters:
           - name: oas_location
           - name: service_name
           - name: service_namespace
       container:
         image: claudioed/pipeline-converters:v.0.0.1
-        args: ["openapi2mock","--oas-location","{{arguments.parameters.oas_location}}","--service-name","{{arguments.parameters.service_name}}","--service-namespace","{{arguments.parameters.service_namespace}}"]
+        args: ["openapi2mock","--oas-location","{{inputs.parameters.oas_location}}","--service-name","{{inputs.parameters.service_name}}","--service-namespace","{{inputs.parameters.service_namespace}}"]
       outputs:
         artifacts:
           - name: cr

@@ -15,24 +15,22 @@ spec:
               revision: "{{input.parameters.branch}}"
         parameters:
           - name: branch
-      arguments:
-        parameters:
           - name: new_api_location
           - name: destination_folder
           - name: api_name
       container:
         image: shesse/redoc-cli
         command: [ redoc-cli ]
-        args: ["bundle","{{arguments.parameters.new_api_location}}","--output","{{arguments.parameters.destination_folder}}"]
+        args: ["bundle","{{inputs.parameters.new_api_location}}","--output","{{inputs.parameters.destination_folder}}"]
       outputs:
         artifacts:
           - name: docs
-            path: "{{arguments.parameters.destination_folder}}"
+            path: "{{inputs.parameters.destination_folder}}"
             archive:
               none: {}
             gcs:
               bucket: argo-artifacts-001
-              key: "docs/{{arguments.parameters.api_name}}.html"
+              key: "docs/{{inputs.parameters.api_name}}.html"
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json

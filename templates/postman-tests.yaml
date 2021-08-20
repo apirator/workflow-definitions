@@ -21,14 +21,12 @@ spec:
               revision: "{{input.parameters.branch}}"
         parameters:
           - name: branch
-      arguments:
-        parameters:
           - name: oas
           - name: file
           - name: api_name
       container:
         image: claudioed/portman
-        args: ["--local","{{arguments.parameters.oas}}","--includeTests","--bundleContractTests","--output","{{arguments.parameters.file}}"]
+        args: ["--local","{{input.parameters.oas}}","--includeTests","--bundleContractTests","--output","{{input.parameters.file}}"]
       outputs:
         artifacts:
           - name: tests
