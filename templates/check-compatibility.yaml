@@ -13,4 +13,4 @@ spec:
           - name: args
       container:
         image: openapitools/openapi-diff:latest
-        args: ["{{inputs.parameters.old_api_location}}","{{inputs.parameters.new_api_location}}", "{{inputs.parameters.args}}"]
+        args: ["{{arguments.parameters.old_api_location}}","{{arguments.parameters.new_api_location}}", "{{arguments.parameters.args}}"]

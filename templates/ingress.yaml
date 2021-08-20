@@ -18,7 +18,7 @@ spec:
             path: /workspace
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
-              revision: "{{inputs.parameters.branch}}"
+              revision: "{{arguments.parameters.branch}}"
       arguments:
         parameters:
           - name: oas
@@ -28,16 +28,16 @@ spec:
       container:
         image: claudioed/openapitokongingress
         command: [oas2ingress,convert]
-        args: ["--oas","{{inputs.parameters.oas}}","--ingress","{{inputs.parameters.ingress}}","--service","{{inputs.parameters.service}}"]
+        args: ["--oas","{{arguments.parameters.oas}}","--ingress","{{arguments.parameters.ingress}}","--service","{{arguments.parameters.service}}"]
       outputs:
         artifacts:
           - name: ingress
-            path: "/tmp/{{inputs.parameters.service}}.yaml"
+            path: "/tmp/{{arguments.parameters.service}}.yaml"
             archive:
               none: {}
             gcs:
               bucket: argo-artifacts-001
-              key: "ingresses/{{inputs.parameters.service}}.yaml"
+              key: "ingresses/{{arguments.parameters.service}}.yaml"
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json

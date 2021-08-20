@@ -16,10 +16,6 @@ spec:
         value: "workspace/apis/players-v5.yaml"
       - name: destination_folder
         value: "/tmp/players.html"
-      - name: api_name
-        value: players-v5
-      - name: branch
-        value: players-v5
       - name: oas
         value: "/workspace/apis/players-v5.yaml"
       - name: ingress
@@ -28,11 +24,8 @@ spec:
         value: players-v5
       - name: commit_message
         value: "players API V5"
-      - name: branch_name
-        value: "players-v5"
       - name: api_name
         value: "players-v5"
-
   templates:
     - name: api-production-flow
       steps:
