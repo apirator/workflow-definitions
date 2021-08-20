@@ -61,7 +61,7 @@ spec:
             arguments:
               parameters:
                 - name: branch
-                  value: players-v5
+                  value: "players-v5"
                 - name: oas
                   value: "/workspace/apis/players-v5.yaml"
                 - name: ingress

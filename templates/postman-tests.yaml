@@ -18,7 +18,7 @@ spec:
             path: /workspace
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
-              revision: "{{input.parameters.branch}}"
+              revision: "{{inputs.parameters.branch}}"
         parameters:
           - name: branch
           - name: oas
@@ -26,14 +26,14 @@ spec:
           - name: api_name
       container:
         image: claudioed/portman
-        args: ["--local","{{input.parameters.oas}}","--includeTests","--bundleContractTests","--output","{{input.parameters.file}}"]
+        args: ["--local","{{inputs.parameters.oas}}","--includeTests","--bundleContractTests","--output","{{inputs.parameters.file}}"]
       outputs:
         artifacts:
           - name: tests
-            path: "/tmp/{{arguments.parameters.file}}"
+            path: "/tmp/{{inputs.parameters.file}}"
             gcs:
               bucket: argo-artifacts-001
-              key: "tests/{{arguments.parameters.file}}.json"
+              key: "tests/{{inputs.parameters.file}}.json"
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json
