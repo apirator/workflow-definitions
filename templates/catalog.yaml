@@ -7,14 +7,14 @@ spec:
   templates:
     - name: api-catalog
       inputs:
-        parameters:
-          - name: branch
         artifacts:
           - name: apis
             path: /workspace
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
               revision: "{{input.parameters.branch}}"
+        parameters:
+          - name: branch
       arguments:
         parameters:
           - name: name
