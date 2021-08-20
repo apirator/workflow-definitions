@@ -41,6 +41,7 @@ spec:
           echo "adding files " && \
           git add catalogs/{{inputs.parameters.api_name}}.yaml && \
           git add apis/{{inputs.parameters.api_name}}.yaml && \
+          git add {{inputs.parameters.api-context-location}} && \
           git status && \
           echo "commiting files " && \
           git commit -m "new api" && \
