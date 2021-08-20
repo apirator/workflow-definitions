@@ -19,6 +19,7 @@ spec:
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
               revision: "{{inputs.parameters.branch}}"
+      arguments:
         parameters:
           - name: oas
           - name: ingress

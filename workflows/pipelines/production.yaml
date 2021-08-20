@@ -12,6 +12,27 @@ spec:
         value: "workspace/apis/players-v5.yaml"
       - name: error_on
         value: error
+      - name: new_api_location
+        value: "workspace/apis/players-v5.yaml"
+      - name: destination_folder
+        value: "/tmp/players.html"
+      - name: api_name
+        value: players-v5
+      - name: branch
+        value: players-v5
+      - name: oas
+        value: "/workspace/apis/players-v5.yaml"
+      - name: ingress
+        value: /tmp
+      - name: service
+        value: players-v5
+      - name: commit_message
+        value: "players API V5"
+      - name: branch_name
+        value: "players-v5"
+      - name: api_name
+        value: "players-v5"
+
   templates:
     - name: api-production-flow
       steps:
@@ -23,62 +44,19 @@ spec:
             templateRef:
               name: api-catalog-wt
               template: api-catalog
-            arguments:
-              parameters:
-                - name: oas-location
-                  value: "workspace/apis/players-v5.yaml"
-                - name: name
-                  value: players-v5
-                - name: lifecycle
-                  value: production
-                - name: api-type
-                  value: internal
-                - name: owner
-                  value: bets-team
-                - name: system
-                  value: bets
-                - name: branch
-                  value: players-v5
         - - name: document-api
             templateRef:
               name: documentation-api-wt
               template: openapi-doc
-            arguments:
-              parameters:
-                - name: branch
-                  value: players-v5
-                - name: new_api_location
-                  value: "workspace/apis/players-v5.yaml"
-                - name: destination_folder
-                  value: "/tmp/players.html"
-                - name: api_name
-                  value: players-v5
         - - name: deploy-api
             templateRef:
               name: create-ingress-wt
               template: create-ingress
-            arguments:
-              parameters:
-                - name: branch
-                  value: players-v5
-                - name: oas
-                  value: "/workspace/apis/players-v5.yaml"
-                - name: ingress
-                  value: /tmp
-                - name: service
-                  value: players-v5
         - - name: create-pr
             templateRef:
               name: create-api-pr-production-wt
               template: create-pr
             arguments:
-              parameters:
-                - name: commit_message
-                  value: "players API V5"
-                - name: branch_name
-                  value: "players-v5"
-                - name: api_name
-                  value: "players-v5"
               artifacts:
                 - name: catalog-file
                   from: "{{steps.catalog-api.outputs.artifacts.catalog}}"

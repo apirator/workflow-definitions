@@ -12,6 +12,7 @@ spec:
             path: /tmp/catalog.yaml
           - name: deploy-file
             path: /tmp/deploy.yaml
+      arguments:
         parameters:
           - name: commit_message
           - name: branch_name
