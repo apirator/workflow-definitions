@@ -21,4 +21,4 @@ spec:
       container:
         image: stoplight/spectral
         command: [ spectral, lint ]
-        args: ["{{inputs.parameters.location}}","--fail-severity={{inputs.parameters.error_on}}"]
+        args: ["{{arguments.parameters.location}}","--fail-severity={{arguments.parameters.error_on}}"]
