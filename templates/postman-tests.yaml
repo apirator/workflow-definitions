@@ -19,11 +19,12 @@ spec:
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
               revision: "{{input.parameters.branch}}"
+        parameters:
+          - name: branch
       arguments:
         parameters:
           - name: oas
           - name: file
-          - name: branch
           - name: api_name
       container:
         image: claudioed/portman

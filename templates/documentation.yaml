@@ -13,11 +13,12 @@ spec:
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
               revision: "{{input.parameters.branch}}"
+        parameters:
+          - name: branch
       arguments:
         parameters:
           - name: new_api_location
           - name: destination_folder
-          - name: branch
           - name: api_name
       container:
         image: shesse/redoc-cli
