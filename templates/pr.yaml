@@ -29,7 +29,7 @@ spec:
           git clone https://apirator:${GH_TOKEN}@github.com/apirator/workflow-manifests.git
           cd workflow-manifests && \
           git checkout -b {{inputs.parameters.branch_name}} && \
-          bash ./usr/bin/local/pipeline-converters --help && \
+          ./usr/bin/local/pipeline-converters --help && \
           echo "writing files " && \
           cat /tmp/catalog.yaml >> catalogs/{{inputs.parameters.api_name}}.yaml && \
           cat /tmp/deploy.yaml >> apis/{{inputs.parameters.api_name}}.yaml && \
