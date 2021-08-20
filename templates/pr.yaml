@@ -30,6 +30,7 @@ spec:
           git clone https://apirator:${GH_TOKEN}@github.com/apirator/workflow-manifests.git
           cd workflow-manifests && \
           git checkout -b {{inputs.parameters.branch_name}} && \
+          ls -la /workspace/catalogs/apis && \
           pipeline-converters apitocatalog --api-context-location {{inputs.parameters.api-context-location}} --api-name {{inputs.parameters.api_name}} && \
           echo "writing files " && \
           cat /tmp/catalog.yaml >> catalogs/{{inputs.parameters.api_name}}.yaml && \
