@@ -26,10 +26,6 @@ spec:
         value: "players API V5"
       - name: api_name
         value: "players-v5"
-  input:
-    parameters:
-      - name: branch
-        value: players-v5
   templates:
     - name: api-production-flow
       steps:
