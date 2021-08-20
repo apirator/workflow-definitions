@@ -22,7 +22,7 @@ spec:
           - name: oas-location
           - name: branch
       container:
-        image: claudioed/pipeline-converters
+        image: claudioed/pipeline-converters:v0.0.1
         args: ["openapi2backstage","--oas-location","{{inputs.parameters.oas-location}}","--api-type","{{inputs.parameters.api-type}}","--lifecycle","{{inputs.parameters.lifecycle}}","--owner","{{inputs.parameters.owner}}","--system","{{inputs.parameters.system}}","--name","{{inputs.parameters.name}}"]
       outputs:
         artifacts:
