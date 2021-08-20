@@ -29,7 +29,7 @@ spec:
                 - name: oas-location
                   value: "workspace/apis/players-v5.yaml"
                 - name: name
-                  value: players
+                  value: players-v5
                 - name: lifecycle
                   value: production
                 - name: api-type
@@ -53,7 +53,7 @@ spec:
                 - name: destination_folder
                   value: "/tmp/players.html"
                 - name: api_name
-                  value: players
+                  value: players-v5
         - - name: deploy-api
             templateRef:
               name: create-ingress-wt
@@ -67,7 +67,7 @@ spec:
                 - name: ingress
                   value: /tmp
                 - name: service
-                  value: players
+                  value: players-v5
         - - name: create-pr
             templateRef:
               name: create-api-pr-production-wt
