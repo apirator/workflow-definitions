@@ -18,7 +18,7 @@ spec:
           - name: api_name
           - name: api-context-location
       script:
-        image: claudioed/githucli:v.0.0.5
+        image: claudioed/githucli:v.0.0.6
         command: [bash]
         env:
           - name: GH_TOKEN
