@@ -17,7 +17,7 @@ spec:
           - name: branch_name
           - name: api_name
       script:
-        image: claudioed/githucli:v.0.0.4
+        image: claudioed/githucli:v.0.0.5
         command: [bash]
         env:
           - name: GH_TOKEN
@@ -29,7 +29,7 @@ spec:
           git clone https://apirator:${GH_TOKEN}@github.com/apirator/workflow-manifests.git
           cd workflow-manifests && \
           git checkout -b {{inputs.parameters.branch_name}} && \
-          ./usr/bin/local/pipeline-converters --help && \
+          pipeline-converters --help && \
           echo "writing files " && \
           cat /tmp/catalog.yaml >> catalogs/{{inputs.parameters.api_name}}.yaml && \
           cat /tmp/deploy.yaml >> apis/{{inputs.parameters.api_name}}.yaml && \
