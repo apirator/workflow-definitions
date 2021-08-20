@@ -26,6 +26,8 @@ spec:
         value: "players API V5"
       - name: api_name
         value: "players-v5"
+      - name: oas-location
+        value: "/workspace/apis/players-v5.yaml"
   templates:
     - name: api-production-flow
       steps:
