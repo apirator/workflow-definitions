@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: create-api-pr-prototyping-wt
+spec:
+  entrypoint: create-pr-proto
+  templates:
+    - name: create-pr-proto
+      inputs:
+        artifacts:
+          - name: catalog-file
+            path: /tmp/catalog.yaml
+          - name: mock-file
+            path: "/tmp/{{inputs.parameters.api_name}}.yaml"
+        parameters:
+          - name: commit_message
+          - name: branch_name
+          - name: api_name
+          - name: api-context-location
+      script:
+        image: claudioed/githucli:v.0.0.7
+        command: [bash]
+        env:
+          - name: GH_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: github-secret
+                key: GH_TOKEN
+        source: |
+          git clone https://apirator:${GH_TOKEN}@github.com/apirator/workflow-manifests.git
+          cd workflow-manifests && \
+          git checkout -b {{inputs.parameters.branch_name}} && \
+          pipeline-converters apitocatalog --api-context-location {{inputs.parameters.api-context-location}} --api-name {{inputs.parameters.api_name}} && \
+          echo "writing files " && \
+          cat /tmp/catalog.yaml >> catalogs/{{inputs.parameters.api_name}}.yaml && \
+          cat /tmp/{{inputs.parameters.api_name}}.yaml >> mocks/{{inputs.parameters.api_name}}.yaml && \
+          git status && \
+          echo "configuring github user" && \
+          git config --global user.email "apirator@gmail.com" && \
+          git config --global user.name "apirator" && \
+          echo "adding files " && \
+          git add catalogs/{{inputs.parameters.api_name}}.yaml && \
+          git add mocks/{{inputs.parameters.api_name}}.yaml && \
+          git add {{inputs.parameters.api-context-location}} && \
+          git status && \
+          echo "commiting files " && \
+          git commit -m "new api" && \
+          echo "pushing files " && \
+          git push -u origin {{inputs.parameters.branch_name}} && \
+          gh pr create --head {{inputs.parameters.branch_name}} --base main --title "New API " --body "API"

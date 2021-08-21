@@ -14,9 +14,9 @@ spec:
             arguments:
               parameters:
                 - name: branch
-                  value: players-v5
+                  value: players-v3
                 - name: location
-                  value: "workspace/apis/players-v5.yaml"
+                  value: "workspace/apis/players-v3.yaml"
                 - name: error_on
                   value: error
         - - name: document-api
@@ -26,11 +26,33 @@ spec:
             arguments:
               parameters:
                 - name: branch
-                  value: players-v5
+                  value: players-v3
                 - name: new_api_location
-                  value: "workspace/apis/players-v5.yaml"
+                  value: "workspace/apis/players-v3.yaml"
                 - name: destination_folder
                   value: "/tmp/players.html"
+                - name: api_name
+                  value: players-v3
+        - - name: catalog-api
+            templateRef:
+              name: api-catalog-wt
+              template: api-catalog
+            arguments:
+              parameters:
+                - name: oas-location
+                  value: "workspace/apis/players-v3.yaml"
+                - name: name
+                  value: players-v3
+                - name: lifecycle
+                  value: prototyping
+                - name: api-type
+                  value: openapi
+                - name: owner
+                  value: bets
+                - name: system
+                  value: bets
+                - name: branch
+                  value: players-v3
         - - name: mocking-api
             templateRef:
               name: create-mock-wt
@@ -38,10 +60,10 @@ spec:
             arguments:
               parameters:
                 - name: branch
-                  value: players-v5
+                  value: players-v3
                 - name: oas_location
-                  value: "workspace/apis/players-v1.yaml"
+                  value: "workspace/apis/players-v3.yaml"
                 - name: service_name
-                  value: players
+                  value: players-v3
                 - name: service_namespace
                   value: mocks

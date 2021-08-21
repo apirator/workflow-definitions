@@ -14,9 +14,9 @@ spec:
             arguments:
               parameters:
                 - name: branch
-                  value: players-v5
+                  value: players-v2
                 - name: location
-                  value: "workspace/apis/players-v5.yaml"
+                  value: "workspace/apis/players-v2.yaml"
                 - name: error_on
                   value: error
                   ## error, warn,info and hint
@@ -27,19 +27,19 @@ spec:
             arguments:
               parameters:
                 - name: oas-location
-                  value: "workspace/apis/players-v5.yaml"
+                  value: "workspace/apis/players-v2.yaml"
                 - name: name
-                  value: players-v5
+                  value: players-v2
                 - name: lifecycle
                   value: production
                 - name: api-type
-                  value: internal
+                  value: openapi
                 - name: owner
-                  value: bets-team
+                  value: bets
                 - name: system
                   value: bets
                 - name: branch
-                  value: players-v5
+                  value: players-v2
         - - name: document-api
             templateRef:
               name: documentation-api-wt
@@ -47,13 +47,13 @@ spec:
             arguments:
               parameters:
                 - name: branch
-                  value: players-v5
+                  value: players-v2
                 - name: new_api_location
-                  value: "workspace/apis/players-v5.yaml"
+                  value: "workspace/apis/players-v2.yaml"
                 - name: destination_folder
                   value: "/tmp/players.html"
                 - name: api_name
-                  value: players-v5
+                  value: players-v2
         - - name: deploy-api
             templateRef:
               name: create-ingress-wt
@@ -61,13 +61,13 @@ spec:
             arguments:
               parameters:
                 - name: branch
-                  value: "players-v5"
+                  value: "players-v2"
                 - name: oas
-                  value: "/workspace/apis/players-v5.yaml"
+                  value: "/workspace/apis/players-v2.yaml"
                 - name: ingress
                   value: /tmp
                 - name: service
-                  value: players-v5
+                  value: players
         - - name: create-pr
             templateRef:
               name: create-api-pr-production-wt
@@ -75,11 +75,11 @@ spec:
             arguments:
               parameters:
                 - name: commit_message
-                  value: "players API V5"
+                  value: "players API v2"
                 - name: branch_name
-                  value: "players-v5"
+                  value: "players-v2"
                 - name: api_name
-                  value: "players-v5"
+                  value: "players-v2"
                 - name: api-context-location
                   value: "catalogs/apis/apis.yaml"
               artifacts:

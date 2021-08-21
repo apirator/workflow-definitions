@@ -1,0 +1,89 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: api-production-wf-
+spec:
+  entrypoint: api-production-flow
+  templates:
+    - name: api-production-flow
+      steps:
+        - - name: check-api
+            templateRef:
+              name: check-api-wt
+              template: check-api
+            arguments:
+              parameters:
+                - name: branch
+                  value: players-v5
+                - name: location
+                  value: "workspace/apis/players-v5.yaml"
+                - name: error_on
+                  value: error
+                  ## error, warn,info and hint
+        - - name: catalog-api
+            templateRef:
+              name: api-catalog-wt
+              template: api-catalog
+            arguments:
+              parameters:
+                - name: oas-location
+                  value: "workspace/apis/players-v5.yaml"
+                - name: name
+                  value: players-v5
+                - name: lifecycle
+                  value: production
+                - name: api-type
+                  value: openapi
+                - name: owner
+                  value: bets
+                - name: system
+                  value: bets
+                - name: branch
+                  value: players-v5
+        - - name: document-api
+            templateRef:
+              name: documentation-api-wt
+              template: openapi-doc
+            arguments:
+              parameters:
+                - name: branch
+                  value: players-v5
+                - name: new_api_location
+                  value: "workspace/apis/players-v5.yaml"
+                - name: destination_folder
+                  value: "/tmp/players.html"
+                - name: api_name
+                  value: players-v5
+        - - name: deploy-api
+            templateRef:
+              name: create-ingress-wt
+              template: create-ingress
+            arguments:
+              parameters:
+                - name: branch
+                  value: "players-v5"
+                - name: oas
+                  value: "/workspace/apis/players-v5.yaml"
+                - name: ingress
+                  value: /tmp
+                - name: service
+                  value: players-v5
+        - - name: create-pr
+            templateRef:
+              name: create-api-pr-production-wt
+              template: create-pr
+            arguments:
+              parameters:
+                - name: commit_message
+                  value: "players API V5"
+                - name: branch_name
+                  value: "players-v5"
+                - name: api_name
+                  value: "players-v5"
+                - name: api-context-location
+                  value: "catalogs/apis/apis.yaml"
+              artifacts:
+                - name: catalog-file
+                  from: "{{steps.catalog-api.outputs.artifacts.catalog}}"
+                - name: deploy-file
+                  from: "{{steps.deploy-api.outputs.artifacts.ingress}}"
