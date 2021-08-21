@@ -24,7 +24,7 @@ spec:
       outputs:
         artifacts:
           - name: mock
-            path: /tmp
+            path: "/tmp/{{inputs.parameters.service_name}}.yaml"
             archive:
               none: {}
             gcs:
