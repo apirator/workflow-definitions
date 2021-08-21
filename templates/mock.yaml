@@ -12,7 +12,7 @@ spec:
             path: /workspace
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
-              revision: "{{input.parameters.branch}}"
+              revision: "{{inputs.parameters.branch}}"
         parameters:
           - name: branch
           - name: oas_location

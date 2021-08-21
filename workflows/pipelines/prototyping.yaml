@@ -85,4 +85,4 @@ spec:
                 - name: catalog-file
                   from: "{{steps.catalog-api.outputs.artifacts.catalog}}"
                 - name: mock-file
-                  from: "{{steps.mocking-api.outputs.artifacts.ingress}}"
+                  from: "{{steps.mocking-api.outputs.artifacts.mock}}"
