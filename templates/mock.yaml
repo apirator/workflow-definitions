@@ -23,7 +23,7 @@ spec:
         args: ["openapi2mock","--oas-location","{{inputs.parameters.oas_location}}","--service-name","{{inputs.parameters.service_name}}","--service-namespace","{{inputs.parameters.service_namespace}}"]
       outputs:
         artifacts:
-          - name: cr
+          - name: mock
             path: /tmp
             archive:
               none: {}

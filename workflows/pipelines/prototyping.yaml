@@ -67,3 +67,22 @@ spec:
                   value: players-v3
                 - name: service_namespace
                   value: mocks
+        - - name: create-pr
+            templateRef:
+              name: create-api-pr-prototyping-wt
+              template: create-pr-proto
+            arguments:
+              parameters:
+                - name: commit_message
+                  value: "players API V5"
+                - name: branch_name
+                  value: "players-v3"
+                - name: api_name
+                  value: "players-v3"
+                - name: api-context-location
+                  value: "catalogs/apis/apis.yaml"
+              artifacts:
+                - name: catalog-file
+                  from: "{{steps.catalog-api.outputs.artifacts.catalog}}"
+                - name: mock-file
+                  from: "{{steps.mocking-api.outputs.artifacts.ingress}}"
