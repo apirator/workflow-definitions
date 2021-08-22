@@ -33,7 +33,7 @@ spec:
             path: "/tmp/{{inputs.parameters.file}}"
             gcs:
               bucket: argo-artifacts-001
-              key: "tests/{{inputs.parameters.file}}.json"
+              key: "tests/{{inputs.parameters.file}}"
               serviceAccountKeySecret:
                 name: argo-artifact
                 key: argo-development-319710-04e977a95f95.json
