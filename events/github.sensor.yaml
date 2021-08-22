@@ -164,7 +164,7 @@ spec:
             # Error_on
             - src:
                 dependencyName: test-dep
-                dataTemplate: "{{ .Input.body.head_commit.message.error_on }}"
+                dataTemplate: "{{ .Input.body.head_commit.message.error_on | warn }}"
               dest: spec.triggers.0.template.k8s.source.resource.spec.templates.0.steps.0.0.arguments.parameters.2.value
 
       retryStrategy:
