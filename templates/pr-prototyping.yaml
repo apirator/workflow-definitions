@@ -10,8 +10,8 @@ spec:
         artifacts:
           - name: catalog-file
             path: /tmp/catalog.yaml
-          - name: mock-file
-            path: /tmp/mock/mock.yaml
+          - name: mock-file-cr
+            path: /tmp/mock.yaml
         parameters:
           - name: commit_message
           - name: branch_name
