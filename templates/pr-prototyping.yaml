@@ -33,7 +33,7 @@ spec:
           pipeline-converters apitocatalog --api-context-location {{inputs.parameters.api-context-location}} --api-name {{inputs.parameters.api_name}} && \
           echo "writing files " && \
           cat /tmp/catalog.yaml >> catalogs/{{inputs.parameters.api_name}}.yaml && \
-          cat /tmp/{{inputs.parameters.api_name}}.yaml >> mocks/{{inputs.parameters.api_name}}.yaml && \
+          cat /tmp/mock.yaml >> mocks/{{inputs.parameters.api_name}}.yaml && \
           git status && \
           echo "configuring github user" && \
           git config --global user.email "apirator@gmail.com" && \
