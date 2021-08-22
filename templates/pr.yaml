@@ -44,7 +44,7 @@ spec:
           git add {{inputs.parameters.api-context-location}} && \
           git status && \
           echo "commiting files " && \
-          git commit -m "new api" && \
+          git commit -m "{{inputs.parameters.api_name}}" && \
           echo "pushing files " && \
           git push -u origin {{inputs.parameters.branch_name}} && \
-          gh pr create --head {{inputs.parameters.branch_name}} --base main --title "New API " --body "API"
+          gh pr create --head {{inputs.parameters.branch_name}} --base main --title "{{inputs.parameters.commit_message}}" --body "{{inputs.parameters.api_name}}"
