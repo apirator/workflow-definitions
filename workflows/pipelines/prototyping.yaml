@@ -80,7 +80,7 @@ spec:
                 - name: oas
                   value: "workspace/apis/players-v3.yaml"
                 - name: file
-                  value: /tmp/players.json
+                  value: players.json
         - - name: create-pr
             templateRef:
               name: create-api-pr-prototyping-wt

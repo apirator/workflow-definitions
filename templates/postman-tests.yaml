@@ -24,7 +24,7 @@ spec:
           - name: file
       container:
         image: claudioed/portman
-        args: ["--local","{{inputs.parameters.oas}}","--includeTests","--bundleContractTests","--output","{{inputs.parameters.file}}"]
+        args: ["--local","{{inputs.parameters.oas}}","--includeTests","--bundleContractTests","--output","/tmp/{{inputs.parameters.file}}"]
       outputs:
         artifacts:
           - name: tests
