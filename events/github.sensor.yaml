@@ -116,6 +116,8 @@ spec:
                                 value: "players-v5"
                               - name: api_name
                                 value: "players-v5"
+                              - name: api-context-location
+                                value: "catalogs/apis/apis.yaml"
                             artifacts:
                               - name: catalog-file
                                 from: "{{steps.catalog-api.outputs.artifacts.catalog}}"
