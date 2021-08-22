@@ -67,7 +67,7 @@ spec:
                   value: players-v3
                 - name: service_namespace
                   value: mocks
-                - name: service-port
+                - name: service_port
                   value: 9999
         - - name: create-pr
             templateRef:

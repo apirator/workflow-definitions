@@ -18,9 +18,10 @@ spec:
           - name: oas_location
           - name: service_name
           - name: service_namespace
+          - name: service_port
       container:
         image: claudioed/pipeline-converters:v.0.0.2
-        args: ["openapi2mock","--oas-location","{{inputs.parameters.oas_location}}","--service-name","{{inputs.parameters.service_name}}","--service-namespace","{{inputs.parameters.service_namespace}}"]
+        args: ["openapi2mock","--oas-location","{{inputs.parameters.oas_location}}","--service-name","{{inputs.parameters.service_name}}","--service-namespace","{{inputs.parameters.service_namespace}}","--service-port","{{inputs.parameters.service_port}}"]
       outputs:
         artifacts:
           - name: mock
