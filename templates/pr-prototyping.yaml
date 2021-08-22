@@ -47,4 +47,4 @@ spec:
           git commit -m "new api" && \
           echo "pushing files " && \
           git push -u origin {{inputs.parameters.branch_name}} && \
-          gh pr create --head {{inputs.parameters.branch_name}} --base main --title "New API " --body "API"
+          gh pr create --head {{inputs.parameters.branch_name}} --base main --title \" {{inputs.parameters.commit_message}} \" --body "API"

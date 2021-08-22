@@ -67,6 +67,8 @@ spec:
                   value: players-v3
                 - name: service_namespace
                   value: mocks
+                - name: service-port
+                  value: 9999
         - - name: create-pr
             templateRef:
               name: create-api-pr-prototyping-wt
@@ -74,7 +76,7 @@ spec:
             arguments:
               parameters:
                 - name: commit_message
-                  value: "players API V5"
+                  value: "players API V3"
                 - name: branch_name
                   value: "players-v3"
                 - name: api_name
@@ -84,5 +86,5 @@ spec:
               artifacts:
                 - name: catalog-file
                   from: "{{steps.catalog-api.outputs.artifacts.catalog}}"
-                - name: mock-file
+                - name: mock-file-cr
                   from: "{{steps.mocking-api.outputs.artifacts.mock}}"
