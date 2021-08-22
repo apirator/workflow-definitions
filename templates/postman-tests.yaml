@@ -9,7 +9,6 @@ spec:
       - name: oas
       - name: file
       - name: branch
-      - name: api_name
   templates:
     - name: create-postman-tests
       inputs:
@@ -23,7 +22,6 @@ spec:
           - name: branch
           - name: oas
           - name: file
-          - name: api_name
       container:
         image: claudioed/portman
         args: ["--local","{{inputs.parameters.oas}}","--includeTests","--bundleContractTests","--output","{{inputs.parameters.file}}"]
