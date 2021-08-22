@@ -164,7 +164,7 @@ spec:
             # Error_on
             - src:
                 dependencyName: test-dep
-                dataTemplate: "{{ .Input.body.ref | substr 0 7 }}"
+                dataTemplate:  "{{ fromJson .Input.body.head_commit.message.error_on }}"
               dest: spec.templates.0.steps.0.0.arguments.parameters.2.value
 
       retryStrategy:
