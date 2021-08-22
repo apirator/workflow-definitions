@@ -12,6 +12,8 @@ spec:
             path: /tmp/catalog.yaml
           - name: mock-file-cr
             path: /tmp/mock.yaml
+          - name: tests-file
+            path: /tmp/tests.json
         parameters:
           - name: commit_message
           - name: branch_name
@@ -34,6 +36,7 @@ spec:
           echo "writing files " && \
           cat /tmp/catalog.yaml >> catalogs/{{inputs.parameters.api_name}}.yaml && \
           cat /tmp/mock.yaml >> mocks/{{inputs.parameters.api_name}}.yaml && \
+          cat /tmp/tests.json >> tests/{{inputs.parameters.api_name}}.json && \
           git status && \
           echo "configuring github user" && \
           git config --global user.email "apirator@gmail.com" && \
@@ -41,6 +44,7 @@ spec:
           echo "adding files " && \
           git add catalogs/{{inputs.parameters.api_name}}.yaml && \
           git add mocks/{{inputs.parameters.api_name}}.yaml && \
+          git add tests/{{inputs.parameters.api_name}}.json && \
           git add {{inputs.parameters.api-context-location}} && \
           git status && \
           echo "commiting files " && \

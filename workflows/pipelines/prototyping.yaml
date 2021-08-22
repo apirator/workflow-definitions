@@ -69,6 +69,18 @@ spec:
                   value: mocks
                 - name: service_port
                   value: 9999
+        - - name: create-api-tests
+            templateRef:
+              name: create-postman-tests-wt
+              template: create-postman-tests
+            arguments:
+              parameters:
+                - name: branch
+                  value: players-v3
+                - name: oas
+                  value: "workspace/apis/players-v3.yaml"
+                - name: file
+                  value: /tmp/players.json
         - - name: create-pr
             templateRef:
               name: create-api-pr-prototyping-wt
@@ -88,3 +100,5 @@ spec:
                   from: "{{steps.catalog-api.outputs.artifacts.catalog}}"
                 - name: mock-file-cr
                   from: "{{steps.mocking-api.outputs.artifacts.mock}}"
+                - name: tests-file
+                  from: "{{steps.create-api-tests.outputs.artifacts.tests}}"
