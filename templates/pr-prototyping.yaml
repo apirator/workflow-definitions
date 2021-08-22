@@ -11,7 +11,7 @@ spec:
           - name: catalog-file
             path: /tmp/catalog.yaml
           - name: mock-file
-            path: /tmp/mock.yaml
+            path: /tmp/mock/mock.yaml
         parameters:
           - name: commit_message
           - name: branch_name
