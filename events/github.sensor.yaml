@@ -164,7 +164,7 @@ spec:
             # Error_on
             - src:
                 dependencyName: test-dep
-                dataTemplate: "{{ .Input.body.pull_request.head.sha | substr 0 7 }}"
+                dataTemplate: "{{ .Input.body.ref | substr 0 7 }}"
               dest: spec.templates.0.steps.0.0.arguments.parameters.2.value
 
       retryStrategy:
