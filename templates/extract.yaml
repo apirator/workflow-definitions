@@ -21,7 +21,7 @@ spec:
         image: mikefarah/yq:3.4.1
         command: [sh]
         source: |
-          ls  workspace/apis
+          ls  /workspace/apis
       outputs:
         parameters:
           - name: openapi
