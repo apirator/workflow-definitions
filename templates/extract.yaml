@@ -12,20 +12,49 @@ spec:
             path: /workspace
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
-              revision: "players-v4"
+              revision: "{{inputs.parameters.branch}}"
+        parameters:
+          - name: branch
+          - name: modified
       script:
         image: mikefarah/yq:3.4.1
         command: [sh]
         source: |
-          yq read /workspace/apis/players-v4.yaml openapi > /tmp/openapi.txt &&
-          yq read /workspace/apis/players-v4.yaml info.title > /tmp/title.txt
+          yq read /workspace/{{inputs.parameters.modified}} x-kong-name > /tmp/api-name.txt &&
+          yq read /workspace/{{inputs.parameters.modified}} info.x-api-metadata.lifecycle > /tmp/lifecycle.txt
+          yq read /workspace/{{inputs.parameters.modified}} info.x-api-metadata.api-type > /tmp/api-type.txt
+          yq read /workspace/{{inputs.parameters.modified}} info.x-api-metadata.owner > /tmp/owner.txt
+          yq read /workspace/{{inputs.parameters.modified}} info.x-api-metadata.team > /tmp/team.txt
+          yq read /workspace/{{inputs.parameters.modified}} x-kong-name > /tmp/service.txt
       outputs:
         parameters:
-          - name: openapi
+          - name: api-name
             valueFrom:
-              default: "swagger"   # Default value to use if retrieving valueFrom fails. If not provided workflow will fail instead
-              path: /tmp/openapi.txt
-          - name: title
+              default: "dummy"
+              path: /tmp/api-name.txt
+          - name: lifecycle
             valueFrom:
-              default: "java"   # Default value to use if retrieving valueFrom fails. If not provided workflow will fail instead
-              path: /tmp/title.txt
+              default: "dummy"
+              path: /tmp/lifecycle.txt
+          - name: api-type
+            valueFrom:
+              default: "dummy"
+              path: /tmp/api-type.txt
+          - name: owner
+            valueFrom:
+              default: "dummy"
+              path: /tmp/owner.txt
+          - name: team
+            valueFrom:
+              default: "dummy"
+              path: /tmp/team.txt
+          - name: service
+            valueFrom:
+              default: "dummy"
+              path: /tmp/service.txt
+          - name: api_name
+            valueFrom:
+              default: "dummy"
+              path: /tmp/api-name.txt
+
+

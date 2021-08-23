@@ -4,5 +4,11 @@ metadata:
   generateName: extract-wf-
 spec:
   entrypoint: extract
+  arguments:
+    parameters:
+      - name: branch
+        value: players-v10
+      - name: modified
+        value: "/apis/players-v10.yaml"
   workflowTemplateRef:
     name: extract-wt
