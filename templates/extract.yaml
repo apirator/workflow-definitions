@@ -15,7 +15,7 @@ spec:
               revision: "players-v4"
       container:
         image: mikefarah/yq:3.4.1
-        args: ["read /workspace/apis/players-v4.yaml openapi"]
+        args: ["read /workspace/workflow-api-docs/apis/players-v4.yaml openapi"]
       outputs:
         parameters:
           - name: openapi
