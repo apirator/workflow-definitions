@@ -19,7 +19,7 @@ spec:
 #        #args: ["read /workspace/workflow-api-docs/apis/players-v4.yaml openapi"]
       script:
         image: mikefarah/yq:3.4.1
-        command: [bash]
+        command: [sh]
         source: |
           ls  /workspace/workflow-api-docs/apis
       outputs:
