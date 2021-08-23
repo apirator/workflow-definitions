@@ -75,15 +75,15 @@ spec:
                               - name: oas-location
                                 value: "workspace/apis/players-v5.yaml"
                               - name: name
-                                value: players
+                                value: "{{steps.extract-info.outputs.parameters.api-name}}"
                               - name: lifecycle
-                                value: production
+                                value: "{{steps.extract-info.outputs.parameters.lifecycle}}"
                               - name: api-type
-                                value: openapi
+                                value: "{{steps.extract-info.outputs.parameters.api-type}}"
                               - name: owner
-                                value: bets-team
+                                value: "{{steps.extract-info.outputs.parameters.owner}}"
                               - name: system
-                                value: bets
+                                value: "{{steps.extract-info.outputs.parameters.system}}"
                               - name: branch
                                 value: players-v5
                       - - name: document-api
@@ -99,7 +99,7 @@ spec:
                               - name: destination_folder
                                 value: "/tmp/players.html"
                               - name: api_name
-                                value: players
+                                value: "{{steps.extract-info.outputs.parameters.api_name}}"
                       - - name: deploy-api
                           templateRef:
                             name: create-ingress-wt
@@ -113,7 +113,7 @@ spec:
                               - name: ingress
                                 value: /tmp
                               - name: service
-                                value: players
+                                value: "{{steps.extract-info.outputs.parameters.api-name}}"
                       - - name: create-pr
                           templateRef:
                             name: create-api-pr-production-wt
@@ -125,7 +125,7 @@ spec:
                               - name: branch_name
                                 value: "players-v5"
                               - name: api_name
-                                value: "players-v5"
+                                value: "{{steps.extract-info.outputs.parameters.api-name}}"
                               - name: api-context-location
                                 value: "catalogs/apis/apis.yaml"
                             artifacts:
