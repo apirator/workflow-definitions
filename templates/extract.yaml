@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: extract-wt
+spec:
+  entrypoint: extract
+  templates:
+    - name: extract
+      inputs:
+        artifacts:
+          - name: apis
+            path: /workspace
+            git:
+              repo: https://github.com/apirator/workflow-api-docs.git
+              revision: "players-v4"
+      container:
+        image: mikefarah/yq
+        args: ["read workspace/apis/players-v4.yaml openapi > /tmp/openapi.txt"]
+      outputs:
+        parameters:
+          - name: openapi
+            valueFrom:
+              default: "swagger"   # Default value to use if retrieving valueFrom fails. If not provided workflow will fail instead
+              path: /tmp/openapi.txt
