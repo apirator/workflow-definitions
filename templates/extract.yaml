@@ -15,7 +15,6 @@ spec:
               revision: "players-v4"
       container:
         image: mikefarah/yq:3.4.1
-        command: [yq]
         args: ["--help"]
       outputs:
         parameters:
