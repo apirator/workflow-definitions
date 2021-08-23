@@ -25,6 +25,7 @@ spec:
           yq read /workspace/{{inputs.parameters.modified}} info.x-api-metadata.api-type > /tmp/api-type.txt
           yq read /workspace/{{inputs.parameters.modified}} info.x-api-metadata.owner > /tmp/owner.txt
           yq read /workspace/{{inputs.parameters.modified}} info.x-api-metadata.team > /tmp/team.txt
+          yq read /workspace/{{inputs.parameters.modified}} info.x-api-metadata.system > /tmp/system.txt
           yq read /workspace/{{inputs.parameters.modified}} x-kong-name > /tmp/service.txt
       outputs:
         parameters:
@@ -56,5 +57,8 @@ spec:
             valueFrom:
               default: "dummy"
               path: /tmp/api-name.txt
-
+          - name: system
+            valueFrom:
+              default: "dummy"
+              path: /tmp/system.txt
 

@@ -14,12 +14,22 @@ spec:
             arguments:
               parameters:
                 - name: branch
-                  value: players-v5
+                  value: players-v10
                 - name: location
-                  value: "workspace/apis/players-v5.yaml"
+                  value: "workspace/apis/players-v10.yaml"
                 - name: error_on
                   value: error
                   ## error, warn,info and hint
+        - - name: extract-info
+            templateRef:
+              name: extract-wt
+              template: extract
+            arguments:
+              parameters:
+                - name: branch
+                  value: players-v10
+                - name: modified
+                  value: "/apis/players-v10.yaml"
         - - name: catalog-api
             templateRef:
               name: api-catalog-wt
@@ -27,19 +37,19 @@ spec:
             arguments:
               parameters:
                 - name: oas-location
-                  value: "workspace/apis/players-v5.yaml"
+                  value: "workspace/apis/players-v10.yaml"
                 - name: name
-                  value: players-v5
+                  value: "{{steps.extract-info.outputs.parameters.api-name}}"
                 - name: lifecycle
-                  value: production
+                  value: "{{steps.extract-info.outputs.parameters.lifecycle}}"
                 - name: api-type
-                  value: openapi
+                  value: "{{steps.extract-info.outputs.parameters.api-type}}"
                 - name: owner
-                  value: bets
+                  value: "{{steps.extract-info.outputs.parameters.owner}}"
                 - name: system
-                  value: bets
+                  value: "{{steps.extract-info.outputs.parameters.system}}"
                 - name: branch
-                  value: players-v5
+                  value: players-v10
         - - name: document-api
             templateRef:
               name: documentation-api-wt
@@ -47,13 +57,13 @@ spec:
             arguments:
               parameters:
                 - name: branch
-                  value: players-v5
+                  value: players-v10
                 - name: new_api_location
-                  value: "workspace/apis/players-v5.yaml"
+                  value: "workspace/apis/players-v10.yaml"
                 - name: destination_folder
                   value: "/tmp/players.html"
                 - name: api_name
-                  value: players-v5
+                  value: "{{steps.extract-info.outputs.parameters.api_name}}"
         - - name: deploy-api
             templateRef:
               name: create-ingress-wt
@@ -61,13 +71,13 @@ spec:
             arguments:
               parameters:
                 - name: branch
-                  value: "players-v5"
+                  value: "players-v10"
                 - name: oas
-                  value: "/workspace/apis/players-v5.yaml"
+                  value: "/workspace/apis/players-v10.yaml"
                 - name: ingress
                   value: /tmp
                 - name: service
-                  value: players-v5
+                  value: "{{steps.extract-info.outputs.parameters.api-name}}"
         - - name: create-pr
             templateRef:
               name: create-api-pr-production-wt
@@ -77,9 +87,9 @@ spec:
                 - name: commit_message
                   value: "players API V5"
                 - name: branch_name
-                  value: "players-v5"
+                  value: "players-v10"
                 - name: api_name
-                  value: "players-v5"
+                  value: "{{steps.extract-info.outputs.parameters.api-name}}"
                 - name: api-context-location
                   value: "catalogs/apis/apis.yaml"
               artifacts:
