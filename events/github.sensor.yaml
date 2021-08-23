@@ -154,18 +154,15 @@ spec:
               dest: spec.templates.0.steps.0.0.arguments.parameters.1.value
             - src:
                 dependencyName: test-dep
-                dataKey: body.head_commit.modified.0
-              dest: spec.triggers.0.template.k8s.source.resource.spec.templates.0.steps.1.0.arguments.parameters.0.value
+                dataTemplate:  "workspace/{{ first .Input.body.head_commit.modified }}"
+              dest: spec.templates.0.steps.1.0.arguments.parameters.0.value
             - src:
                 dependencyName: test-dep
-                dataKey: body.head_commit.modified.0
-              dest: spec.triggers.0.template.k8s.source.resource.spec.templates.0.steps.2.0.arguments.parameters.1.value
-
-#            # Error_on
-#            - src:
-#                dependencyName: test-dep
-#                dataTemplate:  "{{ fromJson .Input.body.head_commit.message | . }}"
-#              dest: spec.templates.0.steps.0.0.arguments.parameters.2.value
-
+                dataTemplate:  "workspace/{{ first .Input.body.head_commit.modified }}"
+              dest: spec.templates.0.steps.2.0.arguments.parameters.1.value
+            - src:
+                dependencyName: test-dep
+                dataTemplate:  "workspace/{{ first .Input.body.head_commit.modified }}"
+              dest: spec.templates.0.steps.3.0.arguments.parameters.1.value
       retryStrategy:
         steps: 3
