@@ -15,8 +15,8 @@ spec:
               revision: "players-v4"
       container:
         image: mikefarah/yq
-        command: [yq,read]
-        args: [" workspace/apis/players-v4.yaml openapi > /tmp/openapi.txt"]
+        command: [yq]
+        args: [" --help"]
       outputs:
         parameters:
           - name: openapi
