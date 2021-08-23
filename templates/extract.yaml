@@ -13,15 +13,11 @@ spec:
             git:
               repo: https://github.com/apirator/workflow-api-docs.git
               revision: "players-v4"
-#      container:
-#        image:
-#          command: [bash]
-#        #args: ["read /workspace/workflow-api-docs/apis/players-v4.yaml openapi"]
       script:
         image: mikefarah/yq:3.4.1
         command: [sh]
         source: |
-          ls  /workspace/apis
+          yq read /workspace/apis/players-v4.yaml openapi > /tmp/openapi.txt
       outputs:
         parameters:
           - name: openapi
