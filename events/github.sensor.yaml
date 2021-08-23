@@ -150,7 +150,7 @@ spec:
             # commits
             - src:
                 dependencyName: test-dep
-                dataTemplate:  "workspace/{{  .Input.body.head_commit.modified.0 }}"
+                dataTemplate:  "{{  .Input.body.head_commit.modified.0 }}"
               dest: spec.templates.0.steps.0.0.arguments.parameters.1.value
             - src:
                 dependencyName: test-dep
