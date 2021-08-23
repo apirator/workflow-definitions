@@ -17,10 +17,15 @@ spec:
         image: mikefarah/yq:3.4.1
         command: [sh]
         source: |
-          yq read /workspace/apis/players-v4.yaml openapi > /tmp/openapi.txt
+          yq read /workspace/apis/players-v4.yaml openapi > /tmp/openapi.txt &&
+          yq read /workspace/apis/players-v4.yaml info.title > /tmp/title.txt
       outputs:
         parameters:
           - name: openapi
             valueFrom:
               default: "swagger"   # Default value to use if retrieving valueFrom fails. If not provided workflow will fail instead
               path: /tmp/openapi.txt
+          - name: title
+            valueFrom:
+              default: "java"   # Default value to use if retrieving valueFrom fails. If not provided workflow will fail instead
+              path: /tmp/title.txt
