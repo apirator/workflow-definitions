@@ -121,7 +121,7 @@ spec:
                           arguments:
                             parameters:
                               - name: commit_message
-                                value: "players API V5"
+                                value: "{{steps.extract-info.outputs.parameters.api-name}}"
                               - name: branch_name
                                 value: "players-v5"
                               - name: api_name
